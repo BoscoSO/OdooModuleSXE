@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='gestor_loc_action' model='ir.actions.act_window'>
+        <field name="name">Gestion Localizaciones</field>
+        <field name="res_model">gestor.loc</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Gestion Inventarios" id="gestor_base_menu" />
+    <menuitem name="Localizaciones" id="gestor_loc_menu" parent="gestor_base_menu" action="gestor_loc_action"/>
+
+    <!-- Form View -->
+    <record id="gestor_loc_view_form" model="ir.ui.view">
+        <field name="name">Gestion Localizacion</field>
+        <field name="model">gestor.loc</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="posicion"/>
+                        <field name="inventory_ids" widget="one2many_tags"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Tree(list) View -->
+    <record id="gestor_loc_view_tree" model="ir.ui.view">
+        <field name="name">Lista Localizaciones</field>
+        <field name="model">gestor.loc</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="posicion"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="gestor_loc_view_search" model="ir.ui.view">
+        <field name="name">Busqueda Localizaciones</field>
+        <field name="model">gestor.loc</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="inventory_ids"/>
+                <filter string="Sin inventario" name="without_inventory" domain="[('inventory_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

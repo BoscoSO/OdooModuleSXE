@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acl_loc,gestor.loc_default,model_gestor_loc,,1,0,0,0
+acl_loc_gestor,gestor.loc_gestor,model_gestor_loc,group_gestor,1,1,1,1
+acl_loc_inv,gestor.loc_inv_default,model_gestor_loc_inv,,1,0,0,0
+acl_loc_inv_gestor,gestor.loc_inv_gestor,model_gestor_loc_inv,group_gestor,1,1,1,1
+acl_loc_inv_item,gestor.loc_inv_item_default,model_gestor_loc_inv_item,,1,0,0,0
+acl_loc_inv_item_gestor,gestor.loc_inv_item_gestor,model_gestor_loc_inv_item,group_gestor,1,1,1,1

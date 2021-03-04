@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='gestor_loc_inv_item_action' model='ir.actions.act_window'>
+        <field name="name">Gestion Items</field>
+        <field name="res_model">gestor.loc.inv.item</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+
+      <menuitem name="Items" id="gestor_loc_inv_item_menu" 
+    parent="gestor_base_menu" action="gestor_loc_inv_item_action"/>
+    <!-- Form View -->
+    <record id="gestor_loc_inv_item_view_form" model="ir.ui.view">
+        <field name="name">Formulario Item</field>
+        <field name="model">gestor.loc.inv.item</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="reponer_stock" string="Reponer 10 en Stock" type="object"/>
+                </header>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="item_id"/>
+                        <field name="description"/>
+                    </group>
+                    <group>
+                        <field name="price"/>
+                        <field name="units_stock"/>
+                        <field name="item_image" widget="image"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="gestor_loc_inv_item_view_tree" model="ir.ui.view">
+        <field name="name">Lista Items</field>
+        <field name="model">gestor.loc.inv.item</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="units_stock"/>
+                <field name="price"/>
+                <field name="total_value_perunits" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="gestor_loc_inv_item_view_kanban" model="ir.ui.view">
+        <field name="name">Items Kanban</field>
+        <field name="model">gestor.loc.inv.item</field>
+        <field name="arch" type="xml">            
+            <kanban default_group_by="item_id">
+                <field name="id" />
+                <field name="name" />
+                <field name="item_image" />
+                <field name="units_stock"/>
+                <field name="price" />            
+                <templates>
+                    <t t-name="kanban-box">      
+                        <t t-if="record.units_stock.value == 0">
+                            <div class="oe_kanban_card oe_kanban_global_click" style="border: 2px solid red; padding: 10px;  border-radius: 25px; background-color: #aeb8b7;">
+                                <h1><strong><field name="name"/></strong></h1>
+                                <t t-if="record.item_image.raw_value">                                    
+                                    <div class="o_kanban_image_fill_left d-none d-md-block">
+                                        <img class="o_kanban_image_inner_pic" style="max-height: 100px;max-width: 100px" t-att-alt="record.id.value" t-att-src="kanban_image('gestor.loc.inv.item', 'item_image', record.id.raw_value)"/>
+                                    </div>
+                                </t>      
+                                <div  style="color:red">Unidades Agotadas</div>  
+                            </div>
+                        </t>
+                        <t t-elif="record.units_stock.value lt 10">
+                            <div class="oe_kanban_card oe_kanban_global_click" style="border: 2px solid orange; padding: 10px;  border-radius: 25px; background-color: #ffc928;">
+                               <h1><strong><field name="name"/></strong></h1>
+                                <t t-if="record.item_image.raw_value">                                    
+                                    <div class="o_kanban_image_fill_left d-none d-md-block">
+                                        <img class="o_kanban_image_inner_pic" style="max-height: 100px;max-width: 100px" t-att-alt="record.id.value" t-att-src="kanban_image('gestor.loc.inv.item', 'item_image', record.id.raw_value)"/>
+                                    </div>
+                                </t>      
+                                <div>Unidades: <field name="units_stock"/></div>  
+                                <div  style="color:red">Debería Reponerse</div>  
+                                <div>Precio Unidad: <strong><field name="price"/></strong> € </div>  
+                                <div>Valor Total: <strong><field name="total_value_perunits" /> </strong> € </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="oe_kanban_card oe_kanban_global_click" style="border: 2px solid blue; padding: 10px;  border-radius: 25px; background-color: #8aee6c;">
+                                 <h1><strong><field name="name"/></strong></h1>
+                                <t t-if="record.item_image.raw_value">                                    
+                                    <div class="o_kanban_image_fill_left d-none d-md-block">
+                                        <img class="o_kanban_image_inner_pic" style="max-height: 100px;max-width: 100px" t-att-alt="record.id.value" t-att-src="kanban_image('gestor.loc.inv.item', 'item_image', record.id.raw_value)"/>
+                                    </div>
+                                </t>     
+                                <div>Unidades: <field name="units_stock"/></div>  
+                                <div>Precio Unidad: <strong><field name="price"/></strong> € </div>  
+                                <div>Valor Total: <strong><field name="total_value_perunits" /> </strong> € </div>
+                            </div>
+                        </t>
+
+
+                    </t>
+                </templates>
+            </kanban>        
+        </field>
+    </record>
+
+
+</odoo>
