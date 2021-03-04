@@ -8,7 +8,8 @@ My Inventory es un módulo de gestión de inventario
 
 ## De que sirve
 
-Su principal objetivo, es mantener cuenta de los distintos inventarios que una empresa puede tener y donde estan distribuidos (las localizaciones de la empresa)
+Su principal objetivo, es mantener cuenta de los distintos inventarios que una empresa puede tener y donde estan distribuidos (las localizaciones de la empresa) <br>
+entre otras cosas este modulo muestra de manera visual el estado del stock de productos avisando cuando quedan pocos, o cuando no queda ninguno
 
 ## Facil de usar
 
