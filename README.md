@@ -20,7 +20,7 @@ A mayores de datos tipo básico se implementan en este módulo valores monetary 
 
 ## -Herencia
 
-Este módulo no hace esto
+Un item te muestra de que localización proviene y en que inventario estaba almacenado
 
 <br>
 
